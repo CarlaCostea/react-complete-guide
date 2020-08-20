@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import person from './Person/Person';
 
 class App extends Component {
   state = {
@@ -41,7 +42,6 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   }
 
-
   render() {
     const buttonStyle = {
       backgroundColor: 'lightblue',
@@ -49,20 +49,13 @@ class App extends Component {
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer'
-    }
+    };
 
-    // Render Content Conditionally
-    return (
-      <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
-        <button
-          style={buttonStyle}
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        {
-          this.state.showPersons ?
-          // this div is converted to react create element
-          <div>
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
             <Person
               name={this.state.persons[0].name}
               age={this.state.persons[0].age}
@@ -79,10 +72,54 @@ class App extends Component {
               name={this.state.persons[2].name}
               age={this.state.persons[2].age}
             />
-          </div> : null
-        }
+          </div> 
+      )
+    }
+
+    // Handling Dynamic Content "The JS Way"
+    return (
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <p>This is really working!</p>
+        <button
+          style={buttonStyle}
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+          {persons}
       </div>
     );
+
+    // Render Content Conditionally
+    // return (
+    //   <div className="App">
+    //     <h1>Hi, I'm a React App</h1>
+    //     <p>This is really working!</p>
+    //     <button
+    //       style={buttonStyle}
+    //       onClick={this.togglePersonsHandler}>Toggle Persons</button>
+    //     {
+    //       this.state.showPersons ?
+    //       // this div is converted to react create element
+    //       <div>
+    //         <Person
+    //           name={this.state.persons[0].name}
+    //           age={this.state.persons[0].age}
+    //         />
+    //         <Person
+    //           name={this.state.persons[1].name}
+    //           age={this.state.persons[1].age}
+    //           click={this.switchNameHandler.bind(this, 'Carla')}
+    //           changed={this.nameChangeHandler}
+    //         >
+    //           My Hobbies: Code
+    //     </Person>
+    //         <Person
+    //           name={this.state.persons[2].name}
+    //           age={this.state.persons[2].age}
+    //         />
+    //       </div> : null
+    //     }
+    //   </div>
+    // );
 
     // return (
     //   <div className="App">
