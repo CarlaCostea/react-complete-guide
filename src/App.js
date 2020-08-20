@@ -9,7 +9,8 @@ class App extends Component {
       { name: 'Manu', age: 29 },
       { name: 'Stephanie', age: 26 }
     ],
-    otherState: 'some other value'
+    otherState: 'some other value',
+    showPersons: false
   };
 
   switchNameHandler = (newName) => {
@@ -25,7 +26,7 @@ class App extends Component {
   };
 
   nameChangeHandler = (event) => {
-    this.setState( {
+    this.setState({
       persons: [
         { name: 'Carla', age: 30 },
         { name: event.target.value, age: 13 },
@@ -34,6 +35,13 @@ class App extends Component {
     })
   }
 
+  // this syntax is recommended when we need to use THIS
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
+  }
+
+
   render() {
     const buttonStyle = {
       backgroundColor: 'lightblue',
@@ -41,33 +49,68 @@ class App extends Component {
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer'
-
     }
+
+    // Render Content Conditionally
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p>This is really working!</p>
-        <button 
+        <button
           style={buttonStyle}
-          onClick={() => this.switchNameHandler('Max')}>Switch Name</button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click = {this.switchNameHandler.bind(this, 'Carla')}
-          changed = {this.nameChangeHandler}
-        >
-          My Hobbies: Code
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        {
+          this.state.showPersons ?
+          // this div is converted to react create element
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+            />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, 'Carla')}
+              changed={this.nameChangeHandler}
+            >
+              My Hobbies: Code
         </Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        />
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+            />
+          </div> : null
+        }
       </div>
     );
+
+    // return (
+    //   <div className="App">
+    //     <h1>Hi, I'm a React App</h1>
+    //     <p>This is really working!</p>
+    //     <button
+    //       style={buttonStyle}
+    //       onClick={() => this.switchNameHandler('Max')}>Switch Name</button>
+    //     <div>
+    //       <Person
+    //         name={this.state.persons[0].name}
+    //         age={this.state.persons[0].age}
+    //       />
+    //       <Person
+    //         name={this.state.persons[1].name}
+    //         age={this.state.persons[1].age}
+    //         click={this.switchNameHandler.bind(this, 'Carla')}
+    //         changed={this.nameChangeHandler}
+    //       >
+    //         My Hobbies: Code
+    //     </Person>
+    //       <Person
+    //         name={this.state.persons[2].name}
+    //         age={this.state.persons[2].age}
+    //       />
+    //     </div>
+    //   </div>
+    // );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
