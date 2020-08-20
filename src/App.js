@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import person from './Person/Person';
 
 class App extends Component {
   state = {
@@ -26,22 +25,35 @@ class App extends Component {
   //   });
   // };
 
-  nameChangeHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: 'Carla', age: 30 },
-        { name: event.target.value, age: 13 },
-        { name: 'Stephanie', age: 27 }
-      ]
-    })
-  }
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex((p) => {
+      return p.id === id;
+    });
 
+    // do not mutate the state directly (do not mutate the original object)
+    // const person = this.state.persons[personIndex];
+
+    // distribute all the properties of the original object to the new one
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    // const person = Object.assign({}, this.state.persons[personIndex])
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({persons: persons})
+  }
+  
   deletePersonHandler = (personIndex) => {
     // slice used without arguments returns a copy (a new array) of this.state.persons
     // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
-    this.setState({persons: persons})
+    this.setState({ persons: persons })
   }
 
   // this syntax is recommended when we need to use THIS
@@ -70,8 +82,9 @@ class App extends Component {
             return <Person
               click={() => this.deletePersonHandler(index)}
               name={person.name}
-              age={person.age} 
-              key={person.id}/>
+              age={person.age}
+              key={person.id}
+              changed={(event) => this.nameChangeHandler(event, person.id)} />
           })}
         </div>
       )
