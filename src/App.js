@@ -93,10 +93,20 @@ class App extends Component {
       buttonStyle.backgroundColor = 'darkblue'
     }
 
+    // let classes = ['red', 'bold'].join(' '); //"red bold"
+    // in order for this to work wee need to asign a string in className}
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red'); // classes = ['red']
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold'); // classes = ['red', 'bold']
+    }
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
+        <p className={classes.join(' ')}>This is really working!</p>
         <button
           style={buttonStyle}
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
