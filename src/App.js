@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import './App.css';
 import Person from './Person/Person';
 
@@ -69,7 +70,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     // Handling Dynamic Content "The JS Way"
@@ -91,6 +96,10 @@ class App extends Component {
       );
 
       buttonStyle.backgroundColor = 'darkblue'
+      buttonStyle[':hover'] = {
+        backgroundColor: 'darkgreen',
+        color: 'black'
+      }
     }
 
     // let classes = ['red', 'bold'].join(' '); //"red bold"
@@ -116,7 +125,8 @@ class App extends Component {
   }
 }
 
-export default App;
+// wrapp app in Rdium
+export default Radium(App);
 
     // Render Content Conditionally
     // return (
