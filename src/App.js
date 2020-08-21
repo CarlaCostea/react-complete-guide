@@ -45,9 +45,9 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({persons: persons})
+    this.setState({ persons: persons })
   }
-  
+
   deletePersonHandler = (personIndex) => {
     // slice used without arguments returns a copy (a new array) of this.state.persons
     // const persons = this.state.persons.slice();
@@ -65,6 +65,7 @@ class App extends Component {
   render() {
     const buttonStyle = {
       backgroundColor: 'lightblue',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -87,7 +88,9 @@ class App extends Component {
               changed={(event) => this.nameChangeHandler(event, person.id)} />
           })}
         </div>
-      )
+      );
+
+      buttonStyle.backgroundColor = 'darkblue'
     }
 
     return (
