@@ -127,8 +127,9 @@ class App extends Component {
   }
 }
 
+export default App;
 // wrapp app in Rdium
-export default Radium(App);
+// export default Radium(App);
 
     // Render Content Conditionally
     // return (
