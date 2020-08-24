@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-
 import classes from './App.css';
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Person from '../components/Persons/Person/Person';
+// import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
@@ -56,19 +55,19 @@ class App extends Component {
 
     // Handling Dynamic Content "The JS Way"
     let persons = null;
-    let btnClass = [classes.Button]
+    let btnClass = [classes.Button];
 
     if (this.state.showPersons) {
       persons = (
         // convert this.state.persons to array using map Vanilla JS E6
         <div>
           {this.state.persons.map((person, index) => {
-            return <ErrorBoundary key={person.id}>
-            <Person
+            return <Person
+              key={person.id}
               click={() => this.deletePersonHandler(index)}
               name={person.name}
               age={person.age}
-              changed={(event) => this.nameChangeHandler(event, person.id)} /></ErrorBoundary>
+              changed={(event) => this.nameChangeHandler(event, person.id)} />
           })}
         </div>
       );
@@ -86,15 +85,15 @@ class App extends Component {
     }
 
     return (
-        <div className={classes.App}>
-          <h1>Hi, I'm a React App</h1>
-          <p className={assignedClasses.join(' ')}>This is really working!</p>
-          <button
-            className={btnClass.join(' ')}
-            onClick={this.togglePersonsHandler}>Toggle Persons
+      <div className={classes.App}>
+        <h1>Hi, I'm a React App</h1>
+        <p className={assignedClasses.join(' ')}>This is really working!</p>
+        <button
+          className={btnClass.join(' ')}
+          onClick={this.togglePersonsHandler}>Toggle Persons
             </button>
-          {persons}
-        </div>
+        {persons}
+      </div>
     );
   }
 }
