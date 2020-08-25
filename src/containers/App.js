@@ -33,8 +33,8 @@ class App extends Component {
   }
 
   nameChangeHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex((p) => {
-      return p.userId === id;
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
     });
 
     // distribute all the properties of the original object to the new one
