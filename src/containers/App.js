@@ -7,7 +7,7 @@ import Aux from '../hoc/Aux';
 
 class App extends Component {
   constructor(props) {
-    super(props) ;
+    super(props);
     console.log('[App.js] constructor');
     // here we can set this.state=
   }
@@ -19,7 +19,8 @@ class App extends Component {
       { id: 'dhfdf', name: 'Stephanie', age: 26 }
     ],
     otherState: 'some other value',
-    showPersons: false
+    showPersons: false,
+    changeCounter: 0
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -46,8 +47,15 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({ persons: persons })
-  }
+    // to modify changeCounter state we need a function with 2 arguments: previous state and props
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      };
+    });
+  };
+
 
   deletePersonHandler = (personIndex) => {
     const persons = [...this.state.persons];
@@ -66,18 +74,18 @@ class App extends Component {
 
     if (this.state.showPersons) {
       persons = <Persons
-          persons={this.state.persons}
-          clicked={this.deletePersonHandler}
-          changed={this.nameChangeHandler}/>
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangeHandler} />
     }
 
     return (
       <Aux classes={classes.App}>
-      <Cockpit
-      title={this.props.appTitle}
-      showPersons={this.state.showPersons}
-      persons={this.state.persons}
-      clicked={this.togglePersonsHandler}/>
+        <Cockpit
+          title={this.props.appTitle}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler} />
         {persons}
       </Aux>
     );
