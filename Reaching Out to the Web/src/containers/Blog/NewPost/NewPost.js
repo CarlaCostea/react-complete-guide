@@ -21,7 +21,9 @@ class NewPost extends Component {
         axios.post('/posts', post)
             .then(response => {
                 console.log(response);
-                this.setState({submitted: true})
+                //replace does the same thing as redirect
+                this.props.history.replace('/posts');
+                //this.setState({submitted: true})
             });
     }
 
