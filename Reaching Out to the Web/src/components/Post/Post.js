@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './Post.css';
+import { withRouter } from 'react-router-dom';
 
 const post = (props) => (
     <article className="Post" onClick={props.clicked}>
@@ -11,4 +12,5 @@ const post = (props) => (
     </article>
 );
 
-export default post;
+// to get acces to props from parent we need to use hoc withRouter
+export default withRouter(post);
