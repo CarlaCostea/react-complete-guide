@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // to style the active links we need to use NavLink instead of Link
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 // Switch tells react to render only one of the pages -> the first that matches
 import './Blog.css';
 import Posts from './Posts/Posts';
@@ -42,6 +42,8 @@ class Blog extends Component {
                 <Switch>
                     <Route path="/new-post" component={NewPost} />
                     <Route path="/posts" component={Posts} />
+                    <Redirect from="/" to="/posts" />
+                    {/*<Route path="/" component={Posts} /> */}
                     {/*<Route path="/:id" exact component={FullPost} />*/}
                 </Switch>
             </div>
