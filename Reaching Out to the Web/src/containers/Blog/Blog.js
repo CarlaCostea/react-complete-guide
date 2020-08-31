@@ -12,7 +12,7 @@ class Blog extends Component {
         selectedPostId: null,
         error: false
     }
-    componentDidMount () {
+    componentDidMount() {
         axios.get('/posts')
             .then(response => {
                 const posts = response.data.slice(0, 4);
@@ -22,38 +22,46 @@ class Blog extends Component {
                         author: 'Carla'
                     }
                 })
-                this.setState({posts: updatedPosts});
+                this.setState({ posts: updatedPosts });
                 //console.log(response);
             })
             .catch(error => {
-                this.setState({error: true})
+                this.setState({ error: true })
             })
     }
 
     postSelectedHandler = (id) => {
-        this.setState({selectedPostId: id})
+        this.setState({ selectedPostId: id })
     }
 
-    render () {
-        let posts = <p style={{textAlign: 'center'}}>Something went wrong!</p>;
+    render() {
+        let posts = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
         if (!this.state.error) {
             posts = this.state.posts.map(post => {
-                return <Post 
-                    key={post.id} 
-                    title={post.title} 
+                return <Post
+                    key={post.id}
+                    title={post.title}
                     author={post.author}
-                    clicked={() => this.postSelectedHandler(post.id)}/>
+                    clicked={() => this.postSelectedHandler(post.id)} />
             });
         }
 
 
         return (
-            <div>
+            <div className="Blog">
+                <header>
+                    <nav>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/new-post">New Post</a></li>
+                        </ul>
+                    </nav>
+                </header>
                 <section className="Posts">
-                   {posts}
+                    {posts}
                 </section>
                 <section>
-                    <FullPost id={this.state.selectedPostId}/>
+                    <FullPost id={this.state.selectedPostId} />
                 </section>
                 <section>
                     <NewPost />
