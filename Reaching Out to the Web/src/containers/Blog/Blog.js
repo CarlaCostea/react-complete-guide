@@ -15,7 +15,7 @@ class Blog extends Component {
                     <nav>
                         <ul>
                             <li><NavLink
-                                to="/"
+                                to="/posts"
                                 exact
                                 activeClassName="my-active"
                                 // inline style:
@@ -23,7 +23,7 @@ class Blog extends Component {
                                     color: '#fa923f',
                                     textDecoration: 'underline'
                                 }}
-                            >Home</NavLink></li>
+                            >Posts</NavLink></li>
                             <li><NavLink to={{
                                 //this is a relative path --> pathname: this.props.match.url + '/new-post',
                                 // current page -> this.props.match.url 
@@ -40,9 +40,9 @@ class Blog extends Component {
                 {/*dynamic url: id is a route parameter */}
                 {/*<Route path="/posts/:id" exact component={FullPost} />*/}
                 <Switch>
-                    <Route path="/" exact component={Posts} />
                     <Route path="/new-post" component={NewPost} />
-                    <Route path="/:id" exact component={FullPost} />
+                    <Route path="/posts" component={Posts} />
+                    {/*<Route path="/:id" exact component={FullPost} />*/}
                 </Switch>
             </div>
         );
