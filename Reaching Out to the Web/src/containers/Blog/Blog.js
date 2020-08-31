@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // to style the active links we need to use NavLink instead of Link
-import { Route, NavLink } from 'react-router-dom';
-
+import { Route, NavLink, Switch } from 'react-router-dom';
+// Switch tells react to render only one of the pages -> the first that matches
 import './Blog.css';
 import Posts from './Posts/Posts';
 import NewPost from './NewPost/NewPost';
@@ -14,7 +14,7 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><NavLink 
+                            <li><NavLink
                                 to="/"
                                 exact
                                 activeClassName="my-active"
@@ -23,11 +23,11 @@ class Blog extends Component {
                                     color: '#fa923f',
                                     textDecoration: 'underline'
                                 }}
-                                >Home</NavLink></li>
+                            >Home</NavLink></li>
                             <li><NavLink to={{
                                 //this is a relative path --> pathname: this.props.match.url + '/new-post',
                                 // current page -> this.props.match.url 
-                                pathname:'/new-post',
+                                pathname: '/new-post',
                                 hash: '#submit',
                                 search: '?quick-submit=true'
                             }}>New Post</NavLink></li>
@@ -36,10 +36,14 @@ class Blog extends Component {
                 </header>
                 {/*<Route path="/" exact render={() => <h1>Home</h1>} />
                 <Route path="/" render={() => <h1>Home 2</h1>} />*/}
-                <Route path="/" exact component={Posts} />
-                <Route path="/new-post" component={NewPost} />
+
                 {/*dynamic url: id is a route parameter */}
-                <Route path="/:id" exact component={FullPost} />
+                {/*<Route path="/posts/:id" exact component={FullPost} />*/}
+                <Switch>
+                    <Route path="/" exact component={Posts} />
+                    <Route path="/new-post" component={NewPost} />
+                    <Route path="/:id" exact component={FullPost} />
+                </Switch>
             </div>
         );
     }
