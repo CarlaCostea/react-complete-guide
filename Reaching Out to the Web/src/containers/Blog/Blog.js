@@ -8,6 +8,9 @@ import NewPost from './NewPost/NewPost';
 import FullPost from './/FullPost/FullPost';
 
 class Blog extends Component {
+    state = {
+        auth: false
+    }
     render() {
         return (
             <div className="Blog">
@@ -40,9 +43,10 @@ class Blog extends Component {
                 {/*dynamic url: id is a route parameter */}
                 {/*<Route path="/posts/:id" exact component={FullPost} />*/}
                 <Switch>
-                    <Route path="/new-post" component={NewPost} />
+                    {this.state.auth ? <Route path="/new-post" component={NewPost} /> : null}
                     <Route path="/posts" component={Posts} />
-                    <Redirect from="/" to="/posts" />
+                    <Route render={() => <h1>Not found</h1>} />
+                    {/*<Redirect from="/" to="/posts" />*}
                     {/*<Route path="/" component={Posts} /> */}
                     {/*<Route path="/:id" exact component={FullPost} />*/}
                 </Switch>
