@@ -60,8 +60,8 @@ class ContactData extends Component {
                 validation: {
                     required: true
                 },
-                    valid: false,
-                    touched: false
+                valid: false,
+                touched: false
             },
             email: {
                 elementType: 'input',
@@ -85,10 +85,11 @@ class ContactData extends Component {
                     ]
                 },
                 value: '',
-                valid: false
+                valid: true
             },
         },
-        loading: false
+        loading: false,
+        formIsValid: false
     }
 
     orderHandler = (event) => {
@@ -120,7 +121,7 @@ class ContactData extends Component {
 
     checkValidity(value, rules) {
         let isValid = true;
-        
+
         if (rules.required) {
             isValid = value.trim() !== '' && isValid;
         }
@@ -141,14 +142,20 @@ class ContactData extends Component {
             ...this.state.orderForm
         };
         // we need to clone the object deeply
-        const updatedFormElement = { 
+        const updatedFormElement = {
             ...updatedOrderForm[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
-        updatedFormElement.valid=this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
-        this.setState({orderForm: updatedOrderForm});
+
+        let formIsValid = true;
+        for (let inputIdentifier in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid
+        }
+
+        this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
     }
 
     render() {
@@ -173,7 +180,7 @@ class ContactData extends Component {
                         touched={formElement.config.touched}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                 ))}
-                <Button btnType="Success">ORDER</Button>
+                <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
             </form>
         );
         if (this.state.loading) {
