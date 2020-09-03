@@ -5,16 +5,18 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'INCREMENT':
-
-            return {
-                counter: state.counter + 1
-            }
+            const newState = Object.assign({}, state);
+            newState.counter = state.counter + 1;
+            return newState;
         case 'DECREMENT':
             return {
+                // shorter way to update state immutably
+                ...state,
                 counter: state.counter - 1
             }
         case 'ADD':
             return {
+                ...state,
                 counter: state.counter + action.value
             }
     }
