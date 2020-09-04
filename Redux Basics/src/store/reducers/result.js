@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions';
+import * as actionsTypes from '../actions/actionsTypes';
 
 const initialState = {
     results: []
@@ -6,12 +6,12 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.STORE_RESULT:
+        case actionsTypes.STORE_RESULT:
             return {
                 ...state,
                 results: state.results.concat({ id: new Date(), value: action.result })
             }
-        case actionTypes.DELETE_RESULT:
+        case actionsTypes.DELETE_RESULT:
             // const id = 2;
             // const newArray = [...state.results];
             // newArray.splice(id, 1)

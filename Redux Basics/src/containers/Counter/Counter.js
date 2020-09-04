@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import  * as actionCreators from '../../store/actions/actions';
+import  * as actionCreators from '../../store/actions/index';
 
 import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
@@ -39,7 +39,7 @@ const mapDispatchToProps = dispatch => {
         onIncrementCounter: () => dispatch(actionCreators.increment()),
         onDecrementCounter: () => dispatch(actionCreators.decrement()),
         onAddFive: () => dispatch(actionCreators.add(5)),
-        onSubstractFive: () => dispatcha(ctionCreators.add(-5)),
+        onSubstractFive: () => dispatch(actionCreators.add(-5)),
         onStoreResult: (result) => dispatch(actionCreators.storeResult(result)),
         onDeleteResult: (id) => dispatch(actionCreators.deleteResult(id))
     };
