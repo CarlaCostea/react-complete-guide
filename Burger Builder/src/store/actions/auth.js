@@ -62,6 +62,7 @@ export const auth = (email, password, isSignup) => {
                 console.log(response);
                 // calculate expiration date
                 const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+                // if we don't want our token to expire after 1 hour we need to use the refreshed token
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('expirationDate', expirationDate);
                 localStorage.setItem('userId', response.data.localId);

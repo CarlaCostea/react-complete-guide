@@ -16,16 +16,30 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div >
-        <Layout>
+    let routes = (
+      <Switch>
+        <Route path="/auth" component={Auth} />
+        <Route path="/" exact component={BurgerBuilder} />
+        <Redirect to="/" />
+      </Switch>
+    );
+
+    if ( this.props.isAuthenticated ) {
+      routes = (
         <Switch>
           <Route path="/checkout" component={Checkout} />
           <Route path="/orders" component={Orders} />
-          <Route path="/auth" component={Auth} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={BurgerBuilder} />
-          </Switch>
+          <Redirect to="/" />
+        </Switch>
+      );
+    }
+
+    return (
+      <div>
+        <Layout>
+          {routes}
         </Layout>
       </div>
     );
@@ -44,5 +58,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+// to receive route props we need to use withRouter
 export default withRouter( connect( mapStateToProps, mapDispatchToProps )( App ) );
 
