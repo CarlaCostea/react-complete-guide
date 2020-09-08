@@ -1,4 +1,4 @@
-import React, { Component, useDebugValue } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Order from '../../components/Order/Order';

@@ -12,7 +12,7 @@ class Modal extends Component {
     }
 
     componentWillUpdate () {
-        console.log('[Modal] WillUpdtate');
+        //console.log('[Modal] WillUpdtate');
     }
 
     render() {
