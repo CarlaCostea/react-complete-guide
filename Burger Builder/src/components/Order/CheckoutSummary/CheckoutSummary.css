@@ -4,8 +4,9 @@
     margin: auto;
 }
 
+/* because of this media querry the burger is not always centered
 @media (min-width: 600px) {
     .CheckoutSummary {
         width: 500px;
     }
-}
+} */
