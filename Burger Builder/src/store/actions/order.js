@@ -64,10 +64,13 @@ export const fetchOrdersStart = () => {
     };
 };
 
-export const fetchOrders = (token) => {
+export const fetchOrders = (token, userId) => {
     return dispatch => {
         dispatch(fetchOrdersStart());
-        axios.get( '/orders.json?auth=' + token)
+        // &orderBy is a querry param understood by firebase wich alows us to filter informations
+        const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
+        axios.get( '/orders.json' + queryParams)
+        //axios.get( '/orders.json?auth=' + token)
             .then( res => {
                 const fetchedOrders = [];
                 for ( let key in res.data ) {
